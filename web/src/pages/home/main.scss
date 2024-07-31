@@ -1,18 +1,17 @@
+$marginSize: 20px;
+
 .opposite-direc {
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  margin: $marginSize;
   justify-content: space-evenly;
   
   img {
-    width: 150px;
-    height: 150px;
-    margin-right: 20px;
+    margin-right: $marginSize;
   }
 
+  &:nth-child(odd) {
+    flex-Direction: row-reverse ;
+  }
 }
 
-.opposite-direc:nth-child(odd) {
-  display: flex;
-  flex-Direction: row-reverse ;
-}

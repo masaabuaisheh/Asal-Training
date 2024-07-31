@@ -21,7 +21,7 @@ function App() {
           <Image
             src={input.img}
             alt="Unnamed Picture"
-            width={400}
+            width={350}
             height={250}
           />
           <p>{input.text}</p>
