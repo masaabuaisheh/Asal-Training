@@ -1,13 +1,12 @@
 import React from "react";
-import ImageTextBlock from "./ImageTextBlock";
 import logo from "../../assets/images/unnamed.jpg";
-import Image from 'next/image'
+import Image from 'next/image';
 
 const inputs = {
-  input1: { text: "First paragraph text", img: logo.src },
-  input2: { text: "Second paragraph text", img: logo.src },
-  input3: { text: "Third paragraph text", img: logo.src },
-  input4: { text: "Fourth paragraph text", img: logo.src },
+  input1: { text: "First paragraph text", img: logo },
+  input2: { text: "Second paragraph text", img: logo },
+  input3: { text: "Third paragraph text", img: logo },
+  input4: { text: "Fourth paragraph text", img: logo },
 };
 
 function App() {
@@ -15,40 +14,22 @@ function App() {
 
   return (
     <div className="App">
-      {inputsArray.map((input) => (
-        <div>
-         <Image
-         src={input.img}
-         alt="Unnamed Picture"
-         width={800}
-         height={500}
-       />
-         <p>{input.text}</p>
-         </div>
+      {inputsArray.map((input, index) => (
+        <div className="opposite-direc"
+          key={index}
+          style={index % 2 === 1 ? { flexDirection: 'row-reverse' } : { flexDirection: 'row' }}
+        >
+          <Image
+            src={input.img}
+            alt="Unnamed Picture"
+            width={400}
+            height={250}
+          />
+          <p>{input.text}</p>
+        </div>
       ))}
     </div>
   );
 }
 
 export default App;
-
-/*
-const inputs = [
-  {
-    text: "This is the first paragraph.",
-    img: "https://via.placeholder.com/150",
-  },
-  {
-    text: "This is the second paragraph.",
-    img: "https://via.placeholder.com/150",
-  },
-  {
-    text: "This is the third paragraph.",
-    img: "https://via.placeholder.com/150",
-  },
-  {
-    text: "This is the fourth paragraph.",
-    img: "https://via.placeholder.com/150",
-  },
-];
-*/
