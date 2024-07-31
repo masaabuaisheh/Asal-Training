@@ -9,4 +9,10 @@
     height: 150px;
     margin-right: 20px;
   }
+
+}
+
+.opposite-direc:nth-child(odd) {
+  display: flex;
+  flex-Direction: row-reverse ;
 }

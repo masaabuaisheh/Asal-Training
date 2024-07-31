@@ -17,7 +17,6 @@ function App() {
       {inputsArray.map((input, index) => (
         <div className="opposite-direc"
           key={index}
-          style={index % 2 === 1 ? { flexDirection: 'row-reverse' } : { flexDirection: 'row' }}
         >
           <Image
             src={input.img}
