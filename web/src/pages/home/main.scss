@@ -1,0 +1,17 @@
+$marginSize: 20px;
+
+.opposite-direc {
+  display: flex;
+  align-items: center;
+  margin: $marginSize;
+  justify-content: space-evenly;
+  
+  img {
+    margin-right: $marginSize;
+  }
+
+  &:nth-child(odd) {
+    flex-Direction: row-reverse ;
+  }
+}
+
