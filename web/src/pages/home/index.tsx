@@ -1,12 +1,13 @@
 import React from "react";
 import ImageTextBlock from "./ImageTextBlock";
-import Image from "./images/unnamed.jpg";
+import logo from "../../assets/images/unnamed.jpg";
+import Image from 'next/image'
 
 const inputs = {
-  input1: { text: "First paragraph text", img: Image.src },
-  input2: { text: "Second paragraph text", img: Image.src },
-  input3: { text: "Third paragraph text", img: Image.src },
-  input4: { text: "Fourth paragraph text", img: Image.src },
+  input1: { text: "First paragraph text", img: logo.src },
+  input2: { text: "Second paragraph text", img: logo.src },
+  input3: { text: "Third paragraph text", img: logo.src },
+  input4: { text: "Fourth paragraph text", img: logo.src },
 };
 
 function App() {
@@ -14,13 +15,16 @@ function App() {
 
   return (
     <div className="App">
-      {inputsArray.map((input, index) => (
-        <ImageTextBlock
-          key={index}
-          text={input.text}
-          img={input.img}
-          reverse={index % 2 === 1}
-        />
+      {inputsArray.map((input) => (
+        <div>
+         <Image
+         src={input.img}
+         alt="Unnamed Picture"
+         width={800}
+         height={500}
+       />
+         <p>{input.text}</p>
+         </div>
       ))}
     </div>
   );
