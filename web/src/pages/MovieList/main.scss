@@ -11,10 +11,10 @@ $buttonPadding: 8px 12px;
 $moviListPadding: 15px;
 $moviListBoxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
 $whiteColor: #ffffff;
-$Bluecolor: #0070f3;
-$BluecolorHover: #005bb5;
+$blueColor: #0070f3;
+$blueColorHover: #005bb5;
 $grayColor: #444444;
-$BoldFont: bold;
+$boldFont: bold;
 $pointerCursor: pointer;
 
 .main-page {
@@ -39,11 +39,14 @@ $pointerCursor: pointer;
 .listsContainer {
   margin-top: $marginTop;
   display: grid;
-  grid-template-columns: (50%) (50%);
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: auto auto;
   gap: $gap;
 }
 
 .movieList {
+  display: flex;
+  flex-direction: column;
   background-color: $whiteColor;
   padding: $moviListPadding;
   border-radius: $borderRadius;
@@ -51,30 +54,30 @@ $pointerCursor: pointer;
 }
 
 .handleButton {
-  background-color: $Bluecolor;
+  background-color: $blueColor;
   color: $whiteColor;
   border: none;
   padding: $buttonPadding;
   border-radius: $borderRadius;
   cursor: $pointerCursor;
   margin-right: $marginRight;
-}
 
-.handleButton:hover {
-  background-color: $BluecolorHover;
+  &:hover {
+    background-color: $blueColorHover;
+  }
 }
 
 .toggleButton {
-  background-color: $Bluecolor;
+  background-color: $blueColor;
   color: $whiteColor;
   border: none;
   padding: $buttonPadding;
-  border-radius:$borderRadius;
+  border-radius: $borderRadius;
   cursor: $pointerCursor;
-}
 
-.toggleButton:hover {
-  background-color: $BluecolorHover;
+  &:hover {
+    background-color: $blueColorHover;
+  }
 }
 
 .handleButtonList {
@@ -84,5 +87,30 @@ $pointerCursor: pointer;
   padding: $buttonPadding;
   cursor: $pointerCursor;
   margin-top: $marginTop;
-  font-weight: $BoldFont;
+  font-weight: $boldFont;
+}
+
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  justify-content: center;
+
+  li {
+    margin: 0 5px;
+    cursor: $pointerCursor;
+
+    a {
+      padding: $buttonPadding;
+      text-decoration: none;
+      color: $whiteColor;
+      background-color: $grayColor;
+      border-radius: $borderRadius;
+
+      &:hover {
+        background-color: $blueColorHover;
+      }
+    }
+  }
 }
