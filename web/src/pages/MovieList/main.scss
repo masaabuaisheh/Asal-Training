@@ -1,0 +1,88 @@
+$bored: 1px solid #ccc;
+$mainPage-padding: 0 40px 0 20px;
+$marginButtom: 20px;
+$marginRight: 20px;
+$marginTop: 20px;
+$titlePadding: 10px;
+$searchInputPadding: 8px;
+$borderRadius: 4px;
+$gap: 20px;
+$buttonPadding: 8px 12px;
+$moviListPadding: 15px;
+$moviListBoxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$whiteColor: #ffffff;
+$Bluecolor: #0070f3;
+$BluecolorHover: #005bb5;
+$grayColor: #444444;
+$BoldFont: bold;
+$pointerCursor: pointer;
+
+.main-page {
+  border: $bored;
+  padding: $mainPage-padding;
+  margin: 0;
+}
+
+.title {
+  padding: $titlePadding;
+  margin-bottom: $marginButtom;
+}
+
+.searchInput {
+  width: 100%;
+  padding: $searchInputPadding;
+  margin-bottom: $marginButtom;
+  border-radius: $borderRadius;
+  border: $bored;
+}
+
+.listsContainer {
+  margin-top: $marginTop;
+  display: grid;
+  grid-template-columns: (50%) (50%);
+  gap: $gap;
+}
+
+.movieList {
+  background-color: $whiteColor;
+  padding: $moviListPadding;
+  border-radius: $borderRadius;
+  box-shadow: $moviListBoxShadow;
+}
+
+.handleButton {
+  background-color: $Bluecolor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+  margin-right: $marginRight;
+}
+
+.handleButton:hover {
+  background-color: $BluecolorHover;
+}
+
+.toggleButton {
+  background-color: $Bluecolor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius:$borderRadius;
+  cursor: $pointerCursor;
+}
+
+.toggleButton:hover {
+  background-color: $BluecolorHover;
+}
+
+.handleButtonList {
+  background-color: $whiteColor;
+  color: $grayColor;
+  border: none;
+  padding: $buttonPadding;
+  cursor: $pointerCursor;
+  margin-top: $marginTop;
+  font-weight: $BoldFont;
+}
