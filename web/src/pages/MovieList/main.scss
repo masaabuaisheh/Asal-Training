@@ -28,12 +28,27 @@ $pointerCursor: pointer;
   margin-bottom: $marginButtom;
 }
 
+.back {
+  background-color: $blueColor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+  margin-left: 97%;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $blueColorHover;
+  }
+}
 .searchInput {
   width: 100%;
   padding: $searchInputPadding;
   margin-bottom: $marginButtom;
   border-radius: $borderRadius;
   border: $bored;
+  margin-top: 20px;
 }
 
 .listsContainer {
@@ -51,6 +66,13 @@ $pointerCursor: pointer;
   padding: $moviListPadding;
   border-radius: $borderRadius;
   box-shadow: $moviListBoxShadow;
+}
+
+.watchMovie {
+  border: $bored;
+  box-shadow: $moviListBoxShadow;
+  padding: $moviListPadding;
+  margin-bottom: $marginButtom;
 }
 
 .handleButton {
@@ -90,27 +112,9 @@ $pointerCursor: pointer;
   font-weight: $boldFont;
 }
 
-.pagination {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-  justify-content: center;
-
-  li {
-    margin: 0 5px;
-    cursor: $pointerCursor;
-
-    a {
-      padding: $buttonPadding;
-      text-decoration: none;
-      color: $whiteColor;
-      background-color: $grayColor;
-      border-radius: $borderRadius;
-
-      &:hover {
-        background-color: $blueColorHover;
-      }
-    }
-  }
+.showMore {
+  border: none;
+  background-color: #ffffff;
+  color: #ccc;
+  font-weight: bold;
 }
