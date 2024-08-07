@@ -22,7 +22,7 @@ import TheAvengers from "../../assets/images/TheAvengers.jpg";
 import TheLionKing from "../../assets/images/TheLionKing.jpg";
 
 // Define a TypeScript type for the movie object
-type Movie = {
+interface Movie {
   id: number;
   title: string;
   year: number;
@@ -43,59 +43,39 @@ type Movie = {
 };
 
 function MovieListManager() {
-  const [listOfMovie, setListOfMovie] = useState<Movie[]>([]);
   const [watchList, setWatchList] = useState<Movie[]>([]);
   const [watchedList, setWatchedList] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [detailsVisible, setDetailsVisible] = useState<number | null>(null);
-  const [displayedMovies, setDisplayedMovies] = useState<Movie[]>([]);
+  const [,setDisplayedMovies] = useState<Movie[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const itemsPerPage = 10;
 
-  const getPosterImage = (id: number): string => {
-    switch (id) {
-      case 1: return theshawshankredemption.src;
-      case 2: return theGodfather.src;
-      case 3: return theDarkknight.src;
-      case 4: return pulpFiction.src;
-      case 5: return forrestGump.src;
-      case 6: return inception.src;
-      case 7: return TheMatrix.src;
-      case 8: return TheLordoftheRings.src;
-      case 9: return TheDarkKnightRises.src;
-      case 10: return Interstellar.src;
-      case 11: return FightClub.src;
-      case 12: return Gladiator.src;
-      case 13: return TheTwoTowers.src;
-      case 14: return TheSilenceoftheLambs.src;
-      case 15: return TheDeparted.src;
-      case 16: return SavingPrivateRyan.src;
-      case 17: return ThePrestige.src;
-      case 18: return Glory.src;
-      case 19: return TheAvengers.src;
-      case 20: return TheLionKing.src;
-      default: return 'https://via.placeholder.com/200x300?text=No+Image';
-    }
+  const posterImages: { [id: number]: string } = {
+    1: theshawshankredemption.src,
+    2: theGodfather.src,
+    3: theDarkknight.src,
+    4: pulpFiction.src,
+    5: forrestGump.src,
+    6: inception.src,
+    7: TheMatrix.src,
+    8: TheLordoftheRings.src,
+    9: TheDarkKnightRises.src,
+    10: Interstellar.src,
+    11: FightClub.src,
+    12: Gladiator.src,
+    13: TheTwoTowers.src,
+    14: TheSilenceoftheLambs.src,
+    15: TheDeparted.src,
+    16: SavingPrivateRyan.src,
+    17: ThePrestige.src,
+    18: Glory.src,
+    19: TheAvengers.src,
+    20: TheLionKing.src,
   };
 
-  // Fetch movie data from an API
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('https://freetestapi.com/api/v1/movies');
-      const data = await response.json();
-
-      const moviesWithImages = data.map((movie: Movie) => ({
-        ...movie,
-        poster: getPosterImage(movie.id),
-      }));
-
-      setListOfMovie(moviesWithImages);
-      setWatchList(moviesWithImages.sort((a: any, b: any) => a.title.localeCompare(b.title)));
-      setDisplayedMovies(moviesWithImages.slice(0, itemsPerPage));
-    };
-
-    fetchData();
-  }, []);
+  const getPosterImage = (id: number): string => {
+    return posterImages[id] || 'https://via.placeholder.com/200x300?text=No+Image';
+  };
 
   const addToWatched = (movie: Movie) => {
     setWatchList((prev) =>
@@ -115,7 +95,6 @@ function MovieListManager() {
     );
   };
 
-
   const toggleDetails = (id: number) => {
     setDetailsVisible((prev) => (prev === id ? null : id));
   };
@@ -128,6 +107,27 @@ function MovieListManager() {
     movie.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const getImages = (data :Movie[]) => {
+    const moviesWithImages = data.map((movie: Movie) => ({
+      ...movie,
+      poster: getPosterImage(movie.id),
+    }));
+
+    setWatchList(moviesWithImages.sort((a: any, b: any) => a.title.localeCompare(b.title)));
+    setDisplayedMovies(moviesWithImages.slice(0, 10));
+  };
+
+   // Fetch movie data from an API
+   useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('https://freetestapi.com/api/v1/movies');
+      const data = await response.json();
+      getImages(data);
+    };
+
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       /*window.innerHeight is the height of the viewport
@@ -139,24 +139,24 @@ function MovieListManager() {
       if (bottom) {
         const nextPage = currentPage + 1;
         //Calculates the starting index for the next page of items
-        const startIndex = nextPage * itemsPerPage;
+        const startIndex = nextPage * 10;
         console.log("nextPage: ",nextPage);
         console.log("sIndex: ",startIndex);
         console.log("watchList.length: ",watchList.length )
+
         //Checks if more items are available and if so, updates the displayed movies
         if (startIndex < watchList.length ) {
-          const newMovies = watchList.slice(startIndex, startIndex + itemsPerPage);
+          const newMovies = watchList.slice(startIndex, startIndex + 10);
           console.log("newMovies",newMovies)
-          console.log("startIndex + itemsPerPage: ",startIndex + itemsPerPage)
+          console.log("startIndex + itemsPerPage: ",startIndex + 10)
           if (newMovies.length > 0) {
             setDisplayedMovies((prev) => [...prev, ...newMovies]);
             setCurrentPage(nextPage);
             console.log("nextPage",nextPage)
           }
         }
-
         if (startIndex < watchedList.length) {
-          const newMovies = watchedList.slice(startIndex, startIndex + itemsPerPage);
+          const newMovies = watchedList.slice(startIndex, startIndex + 10);
           if (newMovies.length > 0) {
             setDisplayedMovies((prev) => [...prev, ...newMovies]);
             setCurrentPage(nextPage);
@@ -170,7 +170,7 @@ function MovieListManager() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [currentPage, itemsPerPage, watchList, watchedList]);
+  }, [currentPage, 10, watchList, watchedList]);
 
   return (
     <div className='main-page'>
@@ -186,7 +186,7 @@ function MovieListManager() {
       <div className='listsContainer'>
         <div className='movieList'>
           <h2>Watch List</h2>
-          {filteredWatchList.slice(0, (currentPage + 1) * itemsPerPage).map((movie) => (
+          {filteredWatchList.slice(0, (currentPage + 1) * 10).map((movie) => (
             <div key={movie.id}>
               <div className='watchMovie'>
                 <h3>{movie.title}</h3>
@@ -220,7 +220,7 @@ function MovieListManager() {
 
         <div className='movieList'>
           <h2>Watched List</h2>
-          {filteredWatchedList.slice(0, (currentPage + 1) * itemsPerPage).map((movie) => (
+          {filteredWatchedList.slice(0, (currentPage + 1) * 10).map((movie) => (
             <div key={movie.id}>
               <div className='watchMovie'>
                 <h3>{movie.title}</h3>
