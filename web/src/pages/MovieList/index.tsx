@@ -90,7 +90,7 @@ function MovieListManager() {
       }));
 
       setListOfMovie(moviesWithImages);
-      setWatchList(moviesWithImages);
+      setWatchList(moviesWithImages.sort((a: any, b: any) => a.title.localeCompare(b.title)));
       setDisplayedMovies(moviesWithImages.slice(0, itemsPerPage));
     };
 
@@ -98,14 +98,23 @@ function MovieListManager() {
   }, []);
 
   const addToWatched = (movie: Movie) => {
-    setWatchList((prev) => prev.filter((mov) => mov.id !== movie.id));
-    setWatchedList((prev) => [...prev, movie]);
+    setWatchList((prev) =>
+      prev.filter((mov) => mov.id !== movie.id).sort((a: Movie, b: Movie) => a.title.localeCompare(b.title))
+    );
+    setWatchedList((prev) =>
+      [...prev, movie].sort((a: Movie, b: Movie) => a.title.localeCompare(b.title))
+    );
   };
 
   const removeFromWatched = (movie: Movie) => {
-    setWatchedList((prev) => prev.filter((mov) => mov.id !== movie.id));
-    setWatchList((prev) => [...prev, movie]);
+    setWatchedList((prev) =>
+      prev.filter((mov) => mov.id !== movie.id).sort((a: Movie, b: Movie) => a.title.localeCompare(b.title))
+    );
+    setWatchList((prev) =>
+      [...prev, movie].sort((a: Movie, b: Movie) => a.title.localeCompare(b.title))
+    );
   };
+
 
   const toggleDetails = (id: number) => {
     setDetailsVisible((prev) => (prev === id ? null : id));
@@ -131,13 +140,18 @@ function MovieListManager() {
         const nextPage = currentPage + 1;
         //Calculates the starting index for the next page of items
         const startIndex = nextPage * itemsPerPage;
-
+        console.log("nextPage: ",nextPage);
+        console.log("sIndex: ",startIndex);
+        console.log("watchList.length: ",watchList.length )
         //Checks if more items are available and if so, updates the displayed movies
-        if (startIndex < watchList.length) {
+        if (startIndex < watchList.length ) {
           const newMovies = watchList.slice(startIndex, startIndex + itemsPerPage);
+          console.log("newMovies",newMovies)
+          console.log("startIndex + itemsPerPage: ",startIndex + itemsPerPage)
           if (newMovies.length > 0) {
             setDisplayedMovies((prev) => [...prev, ...newMovies]);
             setCurrentPage(nextPage);
+            console.log("nextPage",nextPage)
           }
         }
 
