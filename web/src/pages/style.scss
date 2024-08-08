@@ -1,0 +1,63 @@
+$max-height: 100%;
+$max-width: 100%;
+$main-background-color: #f5f5f5;
+$center: center;
+$title-color: #333;
+$main-app-margin-top: 17%;
+$bold-font-weight: bold;
+$box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+$blueColor: #0070f3;
+$blueColorHover: #005bb5;
+$title-font-size: 32px;
+$border-radius: 8px;
+$content-padding: 12px 24px;
+$content-margin: 10px;
+$content-font-size: 18px;
+$white-color: white;
+
+body {
+    height: $max-height;
+    width: $max-width;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: $main-background-color; 
+    font-family: sans-serif;
+}
+  
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: $center;
+    justify-content: $center;
+    margin-top: $main-app-margin-top;
+}
+  
+.main-title {
+    font-size: $title-font-size;
+    font-weight: bold;
+    color: $title-color;
+}
+  
+.main-opposite, .main-movie {
+    text-decoration: none;
+    font-size: $content-font-size;
+    font-weight: $bold-font-weight;
+    color: $white-color;
+    padding: $content-padding;
+    border-radius: $border-radius;
+    margin: $content-margin;
+}
+  
+.main-opposite {
+    background-color: $blueColor;
+}
+  
+.main-movie {
+    background-color: $blueColor; 
+}
+  
+.main-opposite:hover, .main-movie:hover {
+    background-color: $blueColorHover; 
+    box-shadow: $box-shadow;
+}

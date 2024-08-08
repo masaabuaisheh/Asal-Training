@@ -1,0 +1,120 @@
+$bored: 1px solid #ccc;
+$mainPage-padding: 0 40px 0 20px;
+$marginButtom: 20px;
+$marginRight: 20px;
+$marginTop: 20px;
+$titlePadding: 10px;
+$searchInputPadding: 8px;
+$borderRadius: 4px;
+$gap: 20px;
+$buttonPadding: 8px 12px;
+$moviListPadding: 15px;
+$moviListBoxShadow: 0 0 10px rgba(0, 0, 0, 0.1);
+$whiteColor: #ffffff;
+$blueColor: #0070f3;
+$blueColorHover: #005bb5;
+$grayColor: #444444;
+$boldFont: bold;
+$pointerCursor: pointer;
+
+.main-page {
+  border: $bored;
+  padding: $mainPage-padding;
+  margin: 0;
+}
+
+.title {
+  padding: $titlePadding;
+  margin-bottom: $marginButtom;
+}
+
+.back {
+  background-color: $blueColor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+  margin-left: 97%;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $blueColorHover;
+  }
+}
+.searchInput {
+  width: 100%;
+  padding: $searchInputPadding;
+  margin-bottom: $marginButtom;
+  border-radius: $borderRadius;
+  border: $bored;
+  margin-top: 20px;
+}
+
+.listsContainer {
+  margin-top: $marginTop;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-template-rows: auto auto;
+  gap: $gap;
+}
+
+.movieList {
+  display: flex;
+  flex-direction: column;
+  background-color: $whiteColor;
+  padding: $moviListPadding;
+  border-radius: $borderRadius;
+  box-shadow: $moviListBoxShadow;
+}
+
+.watchMovie {
+  border: $bored;
+  box-shadow: $moviListBoxShadow;
+  padding: $moviListPadding;
+  margin-bottom: $marginButtom;
+}
+
+.handleButton {
+  background-color: $blueColor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+  margin-right: $marginRight;
+
+  &:hover {
+    background-color: $blueColorHover;
+  }
+}
+
+.toggleButton {
+  background-color: $blueColor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+
+  &:hover {
+    background-color: $blueColorHover;
+  }
+}
+
+.handleButtonList {
+  background-color: $whiteColor;
+  color: $grayColor;
+  border: none;
+  padding: $buttonPadding;
+  cursor: $pointerCursor;
+  margin-top: $marginTop;
+  font-weight: $boldFont;
+}
+
+.showMore {
+  border: none;
+  background-color: #ffffff;
+  color: #ccc;
+  font-weight: bold;
+}

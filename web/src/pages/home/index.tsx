@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/images/unnamed.jpg";
 import Image from 'next/image';
+import Link from 'next/link';
 
 const inputs = {
   input1: { text: "First paragraph text", img: logo },
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div className="App">
+      <Link className='back-home' href="/">Back</Link>
       {inputsArray.map((input, index) => (
         <div className="opposite-direc"
           key={index}

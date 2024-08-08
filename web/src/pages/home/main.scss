@@ -1,4 +1,16 @@
 $marginSize: 20px;
+$whiteColor: #ffffff;
+$blueColor: #0070f3;
+$blueColorHover: #005bb5;
+$grayColor: #444444;
+$boldFont: bold;
+$pointerCursor: pointer;
+$buttonPadding: 8px 12px;
+$borderRadius: 4px;
+
+.App {
+  margin-top: 20px;
+}
 
 .opposite-direc {
   display: flex;
@@ -15,3 +27,18 @@ $marginSize: 20px;
   }
 }
 
+
+.back-home {
+  background-color: $blueColor;
+  color: $whiteColor;
+  border: none;
+  padding: $buttonPadding;
+  border-radius: $borderRadius;
+  cursor: $pointerCursor;
+  margin-left: 2%;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $blueColorHover;
+  }
+}
