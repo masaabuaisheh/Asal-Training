@@ -36,7 +36,6 @@ function DropdownComponent() {
   const [selectedCountries, setSelectedCountries] = useState(null);
   const [message, setMessage] = useState('');
 
-  // Handle change with the correct type
   const handleChange = (selectedOption: any) => {
     setSelectedCountries(selectedOption);
     setMessage('Countries have been selected');
