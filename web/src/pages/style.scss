@@ -39,7 +39,7 @@ body {
     color: $title-color;
 }
   
-.main-opposite, .main-movie {
+.main-opposite, .main-movie , .main-dropdown {
     text-decoration: none;
     font-size: $content-font-size;
     font-weight: $bold-font-weight;
@@ -57,7 +57,11 @@ body {
     background-color: $blueColor; 
 }
   
-.main-opposite:hover, .main-movie:hover {
+.main-dropdown {
+    background-color: $blueColor; 
+}
+
+.main-opposite:hover, .main-movie:hover, .main-dropdown:hover {
     background-color: $blueColorHover; 
     box-shadow: $box-shadow;
 }

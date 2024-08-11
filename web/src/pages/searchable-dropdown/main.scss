@@ -1,0 +1,84 @@
+$secondary-color: #f5f5f5;
+$border-color: #dcdcdc;
+$text-color: #333;
+$padding-content: 80px; 
+$max-width: 800px;
+$border-radius: 8px;
+$margin-bottom: 20px;
+$white: #fff;
+$font-size: 17px;
+$select-width: 400px;
+$whiteColor: #ffffff;
+$blueColor: #0070f3;
+$blueColorHover: #005bb5;
+$pointerCursor: pointer;
+$buttonPadding: 8px 12px;
+$borderRadius: 4px;
+
+.mainDropDown {
+  margin-top: 40px;
+  margin-left: 20px;
+}
+// Style for the main content container
+.main-content-Searchable {
+  max-width: $max-width;
+  margin: 200px auto;
+  padding: $padding-content;
+  background-color: $secondary-color;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);;
+}
+
+h2 {
+  color: $text-color;
+  margin-bottom: $margin-bottom;
+  text-align: center;
+}
+
+// Style for the Select component from react-select
+.selectCountry{
+  background-color: $white;
+  border-radius: $border-radius;
+  padding: 5px;
+  font-size: $font-size;
+  width: $select-width;
+}
+
+.back-selectPage {
+    background-color: $blueColor;
+    color: $whiteColor;
+    border: none;
+    padding: $buttonPadding;
+    border-radius: $borderRadius;
+    cursor: $pointerCursor;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $blueColorHover;
+    }
+  }
+
+  .clear-choise {
+    background-color: $blueColor;
+    color: $whiteColor;
+    border: none;
+    padding: $buttonPadding;
+    border-radius: $borderRadius;
+    cursor: $pointerCursor;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+
+    &:hover {
+      background-color: $blueColorHover;
+    }
+  }
+
+  .message-appear {
+    color: #bcbbbb;
+  }
