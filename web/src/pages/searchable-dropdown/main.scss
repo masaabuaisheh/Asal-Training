@@ -139,23 +139,3 @@ h2 {
 .countryValue:hover {
   background-color: rgba(128, 128, 128, 0.116);
 }
-
-.clear-choise {
-    background-color: $blueColor;
-    color: $whiteColor;
-    border: none;
-    padding: $buttonPadding;
-    border-radius: $borderRadius;
-    cursor: $pointerCursor;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-
-    &:hover {
-      background-color: $blueColorHover;
-    }
-}
-
-  .message-appear {
-    color: #bcbbbb;
-  }
