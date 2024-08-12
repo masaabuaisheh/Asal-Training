@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { MdKeyboardArrowDown } from "react-icons/md";
-import { AiOutlineSearch } from "react-icons/ai";
+
 
 const countries = {
   Palestine: "PL",
@@ -36,7 +36,6 @@ const countryOptions = Object.entries(countries)
 function DropdownComponent() {
   const [search, setSearch] = useState("");
   const [filterData, setFilterData] = useState<{ label: string; value: string }[]>(countryOptions);
-  const [title, setTitle] = useState("");
   const [drop, setDrop] = useState(false);
   const [cursor, setCursor] = useState(-1);
   const [message, setMessage] = useState("");
@@ -68,9 +67,9 @@ function DropdownComponent() {
 
   const selectCountry = (index: number) => {
     const selectedLabel = filterData[index].label;
-    setTitle(selectedLabel);
+    setSearch(selectedLabel); 
     setMessage("Country selected successfully!");
-    //setDrop(false);
+    setDrop(false);
   };
 
   const scrollToCursor = (index: number) => {
@@ -83,8 +82,8 @@ function DropdownComponent() {
   };
 
   const removeCountryFromSelected = () => {
-    if (title) {
-      setTitle("Select Country");
+    if (search) {
+      setSearch(""); 
       setMessage("Selected country removed successfully!");
     } else {
       setMessage("No country selected to remove");
@@ -110,28 +109,21 @@ function DropdownComponent() {
       <Link className='back-selectPage' href="/">Back</Link>
       <div className='main-content-Searchable'>
         <h2>Searchable Dropdown</h2>
-        <h4
-          onClick={() => setDrop(prev => !prev)}
-          className='title'>
-          {title || "Select Country"}
-          <span>
-            <MdKeyboardArrowDown style={{ fontSize: '30px', pointerEvents: 'none' }} />
-          </span>
-        </h4>
-        {drop && (
-          <div className={`country_data ${drop && "dropshow"}`}>
-            <div className="search">
-              <span>
-                <AiOutlineSearch />
-              </span>
-              <input
-                type='text'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder='Search for countries...'
-              />
-            </div>
-            <div className="country" style={{ maxHeight: '150px', overflowY: 'auto' }}>
+        <div className='country_data'>
+          <div className="search">
+            <input
+              type='text'
+              value={search}
+              onClick={() => setDrop(prev => !prev)}
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder='Search for countries...'
+            />
+             <span>
+              <MdKeyboardArrowDown style={{fontSize: "25px", pointerEvents: 'none'}} />
+            </span>
+          </div>
+          {drop && (
+            <div className='country'>
               {filterData.map(({ label, value }, index) => (
                 <div
                   className={`countryValue ${cursor === index ? 'active' : ''}`}
@@ -144,13 +136,13 @@ function DropdownComponent() {
                 </div>
               ))}
             </div>
-          </div>
-        )}
-         <button className='remove-country'
-              onClick={()=>removeCountryFromSelected()}>
-                Remove selected country
-              </button>
-              {message && <p className='message' style= {{fontSize: "14px", color: "GrayText"}}>{message}</p>}
+          )}
+        </div>
+        <button className='remove-country'
+                onClick={() => removeCountryFromSelected()}>
+          Remove selected country
+        </button>
+        {message && <p className='message'>{message}</p>}
       </div>
     </div>
   );

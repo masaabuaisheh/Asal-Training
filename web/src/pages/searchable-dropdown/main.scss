@@ -19,6 +19,7 @@ $borderRadius: 4px;
   margin-top: 40px;
   margin-left: 20px;
 }
+
 // Style for the main content container
 .main-content-Searchable {
   max-width: $max-width;
@@ -54,7 +55,7 @@ h2 {
     }
   }
 
-  .remove-country {
+.remove-country {
     background-color: $blueColor;
     color: $whiteColor;
     border: none;
@@ -63,24 +64,13 @@ h2 {
     cursor: $pointerCursor;
     text-decoration: none;
     font-size: 16px;
+    margin-top: 20px;
+
     &:hover {
       background-color: $blueColorHover;
     }
-  }
-
-// Style for the Select component
-.title {
-  width: 500px;
-  background-color: $white;
-  border-radius: $border-radius;
-  padding: 10px;
-  color: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  border-radius: 5px;
 }
+
 
 // main data part
 .country_data {
@@ -90,28 +80,12 @@ h2 {
   overflow-y: auto;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  transform: translateY(-10px);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 400ms ease-in-out;
-}
-
-.dropshow {
-  transform: translateY(0);
-  opacity: 1;
-  visibility: visible;
-}
-
-.countryValue.active {
-  background-color: #e0e0e0; /* Highlight color */
 }
 
 .country_data .search {
   display: flex;
   align-items: center;
   margin: 16px;
-  padding: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .search input {
@@ -119,13 +93,10 @@ h2 {
   outline: none;
   padding: 5px;
   width: 100%;
+  font-size: 16px;
 }
 
-.country {
-  display: flex;
-  flex-direction: column;
-}
-
+// countries label
 .countryValue {
   margin: 0 8px 0 8px;
   padding: 7px 8px;
@@ -138,4 +109,8 @@ h2 {
 
 .countryValue:hover {
   background-color: rgba(128, 128, 128, 0.116);
+}
+
+.countryValue.active {
+  background-color: #e0e0e0; /* Highlight color */
 }
