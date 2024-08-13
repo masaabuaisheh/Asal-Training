@@ -55,7 +55,7 @@ function DropdownComponent() {
         } else if (cursor === 0) {
           setCursor(-1);  
           scrollToCursor(-1);
-          setIsSearch(false);
+          setIsSearch(true);
 
         } else if (cursor === -1) {
           setIsSearch(true);  
