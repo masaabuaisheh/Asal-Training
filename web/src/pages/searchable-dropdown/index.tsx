@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { MdKeyboardArrowDown } from "react-icons/md";
-
 
 const countries = {
   Palestine: "PL",
@@ -35,26 +34,43 @@ const countryOptions = Object.entries(countries)
 
 function DropdownComponent() {
   const [search, setSearch] = useState("");
+  const [isSearch, setIsSearch] = useState(false);
   const [filterData, setFilterData] = useState<{ label: string; value: string }[]>(countryOptions);
   const [drop, setDrop] = useState(false);
   const [cursor, setCursor] = useState(-1);
   const [message, setMessage] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const dropdownItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleKey = (e: any) => {
     if (drop) {
-      if (e.key === "ArrowUp" && cursor > 0) {
-        setCursor(prevCursor => {
-          const newCursor = prevCursor - 1;
-          scrollToCursor(newCursor);
-          return newCursor;
-        });
-      } else if (e.key === "ArrowDown" && cursor < filterData.length - 1) {
-        setCursor(prevCursor => {
-          const newCursor = prevCursor + 1;
-          scrollToCursor(newCursor);
-          return newCursor;
-        });
-      } else if (e.key === " ") {
+      if (e.key === "ArrowUp") {
+        setIsSearch(false);
+        if (cursor > 0) {
+          setCursor(prevCursor => {
+            const newCursor = prevCursor - 1;
+            scrollToCursor(newCursor);
+            return newCursor;
+          });
+        } else if (cursor === 0) {
+          setCursor(-1);  
+          scrollToCursor(-1);
+        } else if (cursor === -1) {
+          setIsSearch(true);  
+        }
+      } else if (e.key === "ArrowDown") {
+        setIsSearch(false);
+        if (cursor < filterData.length - 1) {
+          setCursor(prevCursor => {
+            const newCursor = prevCursor + 1;
+            scrollToCursor(newCursor);
+            return newCursor;
+          });
+        } else if (cursor === filterData.length - 1) {
+          setCursor(0);  
+          scrollToCursor(0);
+        }
+      } else if (e.key === " " || e.key === "Enter") {
         e.preventDefault();
         if (cursor >= 0) {
           selectCountry(cursor);
@@ -64,7 +80,7 @@ function DropdownComponent() {
       }
     }
   };
-
+  
   const selectCountry = (index: number) => {
     const selectedLabel = filterData[index].label;
     setSearch(selectedLabel); 
@@ -73,10 +89,14 @@ function DropdownComponent() {
   };
 
   const scrollToCursor = (index: number) => {
-    const dropdownItems = document.querySelectorAll('.country .countryValue');
-    if (dropdownItems[index]) {
-      dropdownItems[index].scrollIntoView({
-        behavior: 'smooth'
+    if (index === -1) {
+      searchInputRef.current?.scrollIntoView({
+        behavior: 'smooth',
+      });
+    } else {
+      dropdownItemsRef.current[index]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
       });
     }
   };
@@ -86,9 +106,25 @@ function DropdownComponent() {
       setSearch(""); 
       setMessage("Selected country removed successfully!");
     } else {
-      setMessage("No country selected to remove");
+        setMessage("No country selected to remove");
     }
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (!(event.target as Element).closest('.country_data')) {
+        setDrop(false);
+      }
+    };
+
+    if (drop) {
+      document.body.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.body.removeEventListener('click', handleClickOutside);
+    };
+  }, [drop]);
 
   useEffect(() => {
     setFilterData(
@@ -112,13 +148,21 @@ function DropdownComponent() {
         <div className='country_data'>
           <div className="search">
             <input
+              ref={searchInputRef}
               type='text'
               value={search}
-              onClick={() => setDrop(prev => !prev)}
-              onChange={(e) => setSearch(e.target.value)}
+              onClick={() => { 
+                setDrop(prev => !prev)
+                setIsSearch(true)
+              }}
+              onChange={(e) => {
+                if (isSearch) {
+                  setSearch(e.target.value);
+                }
+              }}
               placeholder='Search for countries...'
             />
-             <span>
+            <span>
               <MdKeyboardArrowDown style={{fontSize: "25px", pointerEvents: 'none'}} />
             </span>
           </div>
@@ -130,6 +174,9 @@ function DropdownComponent() {
                   key={value}
                   role="button"
                   tabIndex={0}
+                  ref={el => {
+                    dropdownItemsRef.current[index] = el;
+                  }}                  
                   onClick={() => selectCountry(index)}
                 >
                   {label}
@@ -149,3 +196,4 @@ function DropdownComponent() {
 }
 
 export default DropdownComponent;
+
