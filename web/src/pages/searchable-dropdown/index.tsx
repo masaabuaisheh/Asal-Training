@@ -113,19 +113,20 @@ function DropdownComponent() {
   };
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!(event.target as Element).closest('.country_data')) {
-        setDrop(false);
-      }
-    };
-
     if (drop) {
-      document.body.addEventListener('click', handleClickOutside);
-    }
+      setCursor(-1); 
+      const handleClickOutside = (event: MouseEvent) => {
+        if (!(event.target as Element).closest('.country_data')) {
+          setDrop(false);
+        }
+      };
+
+    document.body.addEventListener('click', handleClickOutside);
 
     return () => {
       document.body.removeEventListener('click', handleClickOutside);
     };
+  }
   }, [drop]);
 
   useEffect(() => {
@@ -135,12 +136,6 @@ function DropdownComponent() {
       )
     );
   }, [search]);
-
-  useEffect(() => {
-    if (drop) {
-      setCursor(-1); 
-    }
-  }, [drop]);
 
   return (
     <div className='mainDropDown' tabIndex={0} onKeyDown={handleKey}>
