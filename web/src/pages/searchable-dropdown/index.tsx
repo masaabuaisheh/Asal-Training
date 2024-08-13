@@ -45,8 +45,8 @@ function DropdownComponent() {
   const handleKey = (e: any) => {
     if (drop) {
       if (e.key === "ArrowUp") {
-        setIsSearch(false);
         if (cursor > 0) {
+          setIsSearch(false);
           setCursor(prevCursor => {
             const newCursor = prevCursor - 1;
             scrollToCursor(newCursor);
@@ -55,6 +55,8 @@ function DropdownComponent() {
         } else if (cursor === 0) {
           setCursor(-1);  
           scrollToCursor(-1);
+          setIsSearch(false);
+
         } else if (cursor === -1) {
           setIsSearch(true);  
         }
