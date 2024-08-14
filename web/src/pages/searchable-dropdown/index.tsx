@@ -159,7 +159,7 @@ const DropdownComponent = () => {
             <span>
             <FaBars 
               className={`icon-transition ${drop ? '' : 'icon-rotate'}`} 
-              style={{ fontSize: "20px", pointerEvents: 'none', color: 'GrayText' }} 
+              style={{ fontSize: "20px", color: 'GrayText' }} 
             />
           </span>
           </div>
