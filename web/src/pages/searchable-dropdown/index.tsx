@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { FaBars } from "react-icons/fa6";
 
 const countries = {
   Palestine: "PL",
@@ -32,14 +32,14 @@ const countryOptions = Object.entries(countries)
   }))
   .sort((a, b) => a.label.localeCompare(b.label));
 
-function DropdownComponent() {
+const DropdownComponent = () => {
   const [search, setSearch] = useState("");
   const [isSearch, setIsSearch] = useState(false);
   const [filterData, setFilterData] = useState<{ label: string; value: string }[]>(countryOptions);
   const [drop, setDrop] = useState(false);
   const [cursor, setCursor] = useState(-1);
   const [message, setMessage] = useState("");
-  const searchInputRef = useRef<HTMLInputElement>(null);
+
   const dropdownItemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const handleKey = (e: any) => {
@@ -92,7 +92,7 @@ function DropdownComponent() {
 
   const scrollToCursor = (index: number) => {
     if (index === -1) {
-      searchInputRef.current?.scrollIntoView({
+      dropdownItemsRef.current[-1]?.scrollIntoView({
         behavior: 'smooth',
       });
     } else {
@@ -112,29 +112,20 @@ function DropdownComponent() {
     }
   };
 
-  useEffect(() => {
-    if (drop) {
-      setCursor(-1); 
-      const handleClickOutside = (event: MouseEvent) => {
-        if (!(event.target as Element).closest('.country_data')) {
-          setDrop(false);
-        }
-      };
-
-    document.body.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.body.removeEventListener('click', handleClickOutside);
-    };
-  }
-  }, [drop]);
+  const handleBlur = () => {
+    setDrop(false);    
+  };
 
   useEffect(() => {
-    setFilterData(
-      countryOptions.filter(({ label }) =>
-        label.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    const timeoutId  = setTimeout (() =>{
+      setFilterData(
+        countryOptions.filter(({ label }) =>
+          label.toLowerCase().includes(search.toLowerCase())
+        )
+        .sort((a, b) => a.label.toLowerCase().indexOf(search.toLowerCase()) - b.label.toLowerCase().indexOf(search.toLowerCase()))
+ 
+      );
+    },1000)
   }, [search]);
 
   return (
@@ -142,16 +133,20 @@ function DropdownComponent() {
       <Link className='back-selectPage' href="/">Back</Link>
       <div className='main-content-Searchable'>
         <h2>Searchable Dropdown</h2>
-        <div className='country_data'>
+        <div className='country_data'
+          onClick={() => { 
+            setDrop(prev => !prev)
+            setIsSearch(true)
+          }}
+          onBlur={handleBlur}
+        >
           <div className="search">
             <input
-              ref={searchInputRef}
+              ref={el => {
+                dropdownItemsRef.current[-1] = el;
+              }}      
               type='text'
               value={search}
-              onClick={() => { 
-                setDrop(prev => !prev)
-                setIsSearch(true)
-              }}
               onChange={(e) => {
                 if (isSearch) {
                   setSearch(e.target.value);
@@ -159,9 +154,18 @@ function DropdownComponent() {
               }}
               placeholder='Search for countries...'
             />
+            {drop && (
             <span>
-              <MdKeyboardArrowDown style={{fontSize: "25px", pointerEvents: 'none'}} />
+              <FaBars 
+                style={{ fontSize: "20px", pointerEvents: 'none', color: 'GrayText'}} />
             </span>
+            )}
+            {!drop && (
+            <span>
+              <FaBars 
+                style={{ fontSize: "20px", pointerEvents: 'none', transform: 'rotate(90deg)', color: 'GrayText' }} />
+            </span>
+            )}
           </div>
           {drop && (
             <div className='country'>
