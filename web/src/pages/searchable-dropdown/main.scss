@@ -116,3 +116,11 @@ h2 {
 .countryValue.active {
   background-color: #e0e0e0; /* Highlight color */
 }
+
+.icon-transition {
+  transition: transform 1.5s ease-in-out;
+}
+
+.icon-rotate {
+  transform: rotate(90deg);
+}

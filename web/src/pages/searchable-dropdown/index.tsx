@@ -135,7 +135,7 @@ const DropdownComponent = () => {
         <h2>Searchable Dropdown</h2>
         <div className='country_data'
           onClick={() => { 
-            setDrop(prev => !prev)
+            setDrop(true)
             setIsSearch(true)
           }}
           //Triggered when: An element loses focus. This happens when a user clicks outside the element or navigates to another element
@@ -151,22 +151,17 @@ const DropdownComponent = () => {
               onChange={(e) => {
                 if (isSearch) {
                   setSearch(e.target.value);
+                  
                 }
               }}
-              placeholder='Search for countries...'
+              placeholder='Search for countries...' 
             />
-            {drop && (
             <span>
-              <FaBars 
-                style={{ fontSize: "20px", pointerEvents: 'none', color: 'GrayText'}} />
-            </span>
-            )}
-            {!drop && (
-            <span>
-              <FaBars 
-                style={{ fontSize: "20px", pointerEvents: 'none', transform: 'rotate(90deg)', color: 'GrayText' }} />
-            </span>
-            )}
+            <FaBars 
+              className={`icon-transition ${drop ? '' : 'icon-rotate'}`} 
+              style={{ fontSize: "20px", pointerEvents: 'none', color: 'GrayText' }} 
+            />
+          </span>
           </div>
           {drop && (
             <div className='country'>
