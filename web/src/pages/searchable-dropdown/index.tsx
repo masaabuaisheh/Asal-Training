@@ -138,6 +138,7 @@ const DropdownComponent = () => {
             setDrop(prev => !prev)
             setIsSearch(true)
           }}
+          //Triggered when: An element loses focus. This happens when a user clicks outside the element or navigates to another element
           onBlur={handleBlur}
         >
           <div className="search">
