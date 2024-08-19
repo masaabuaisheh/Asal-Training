@@ -1,0 +1,75 @@
+$box-width: 200px;
+$box-height: 200px;
+$box-border-color: #000;
+$button-font-size: 16px;
+$button-padding: 10px 20px;
+$result-font-size: 14px;
+$margin-top-main-class: 2%;
+$title-font-size: 24px;
+$title-font-weight: bold;
+$title-margin-bottom: 20px;
+$start-button-bg-color: #0070f3;
+$start-button-text-color: #fff;
+$start-button-font-size: 18px;
+$start-button-padding: 12px 24px;
+$start-button-border-radius: 8px;
+$start-button-hover-bg-color: #005bb5;
+
+
+.title {
+    text-align: center;
+    font-size: $title-font-size;
+    font-weight: $title-font-weight;
+    margin-bottom: $title-margin-bottom;
+    color: #333;
+}
+
+.start-button-container {
+    text-align: center;
+    margin: 20px;
+}
+
+.start-button {
+    background-color: $start-button-bg-color;
+    color: $start-button-text-color;
+    font-size: $start-button-font-size;
+    padding: $start-button-padding;
+    border: none;
+    border-radius: $start-button-border-radius;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 8px 12px 2px rgba(0, 0, 0, 0.2);
+}
+
+.start-button:hover {
+    background-color: $start-button-hover-bg-color;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4); 
+}
+
+.main-class {
+    width: 100%;
+    margin-top: $margin-top-main-class;
+}
+
+.box {
+    width: $box-width;
+    height: $box-height;
+    margin: 20px auto;
+    border: 2px solid $box-border-color;
+    box-shadow: 0px 6px 10px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 10px; 
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: $button-padding;
+    font-size: $button-font-size;
+}
+
+.result {
+    text-align: center;
+    font-size: $result-font-size;
+    margin-top: 20px;    
+    color: #666;
+}

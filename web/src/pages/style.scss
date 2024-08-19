@@ -3,7 +3,7 @@ $max-width: 100%;
 $main-background-color: #f5f5f5;
 $center: center;
 $title-color: #333;
-$main-app-margin-top: 17%;
+$main-app-margin-top: 12%;
 $bold-font-weight: bold;
 $box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
 $blueColor: #0070f3;
@@ -39,7 +39,7 @@ body {
     color: $title-color;
 }
   
-.main-opposite, .main-movie , .main-dropdown {
+.main-opposite, .main-movie , .main-dropdown , .main-game{
     text-decoration: none;
     font-size: $content-font-size;
     font-weight: $bold-font-weight;
@@ -61,7 +61,11 @@ body {
     background-color: $blueColor; 
 }
 
-.main-opposite:hover, .main-movie:hover, .main-dropdown:hover {
+.main-game {
+    background-color: $blueColor; 
+}
+
+.main-opposite:hover, .main-movie:hover, .main-dropdown:hover, .main-game:hover {
     background-color: $blueColorHover; 
     box-shadow: $box-shadow;
 }
