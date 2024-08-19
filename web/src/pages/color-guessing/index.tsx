@@ -9,7 +9,8 @@ const ColorGuessingGame = () => {
     const [wrongGuesses, setWrongGuesses] = useState(0);
     const roundsRef = useRef(0); // Track rounds
     const [gameOver, setGameOver] = useState(false);
-    const [gameStarted, setGameStarted] = useState(false);
+    const [selectedButton, setSelectedButton] = useState<number | null>(null);
+    const [feedBackColor,setFeedBackColor] = useState('');
 
     const randomColor = (length: any) => {
         return Math.floor(Math.random() * length);
@@ -34,17 +35,25 @@ const ColorGuessingGame = () => {
         setBoxColor(correctColor);
         setButtonColor(Colors);
         setMessage("");
-        setGameStarted(true); 
     };
 
-    const handleGuess = (guessColor: string) => {
+    const handleGuess = (guessColor: string, index: number) => {
         roundsRef.current += 1;
+        setSelectedButton(index);
 
         if (guessColor === boxColor) {
             setCorrectGuesses((prevGuesses) => prevGuesses + 1);
+            setFeedBackColor('green');
+
         } else {
             setWrongGuesses((prevGuesses) => prevGuesses + 1);
+            setFeedBackColor('#b30000');
         }
+
+        setTimeout(() => {
+            setFeedBackColor('');
+            setSelectedButton(null);
+        }, 500);
 
         if (roundsRef.current < 5) {
             startGame();
@@ -59,7 +68,6 @@ const ColorGuessingGame = () => {
         roundsRef.current = 0;
         setMessage('');
         setGameOver(false);
-        setGameStarted(false); 
         startGame();
     };
 
@@ -74,38 +82,36 @@ const ColorGuessingGame = () => {
     }, [roundsRef.current, correctGuesses, wrongGuesses]);
 
     useEffect(() => {
-        if (gameStarted) {
-            startGame();
-        }
-    }, [gameStarted]);
+        startGame();
+    }, []);
 
     return (
         <div className="main-class">
             <div className="title">Color Guessing Game</div>
             <Link className='back-home' href="/">Back</Link>
-            {!gameStarted && (
-                <div className="start-button-container">
-                    <button className="start-button" onClick={startGame}>
-                        Ready to play? Click here to start the game!
-                    </button>
-                </div>
-            )}
             <div className="box" style={{ backgroundColor: boxColor }}></div>
-            {buttonColor.map((color, index) => (
-                <button
-                    key={index}
-                    className={`btn${index + 1}`}
-                    onClick={() => handleGuess(color)}
-                >
-                    {color}
-                </button>
-            ))}
+            <div className="container">
+                <div className="button-container">
+                    {buttonColor.map((color, index) => (
+                        <button
+                            key={index}
+                            className={`btn${index + 1}`}
+                            onClick={() => handleGuess(color, index)}
+                            style={{backgroundColor: selectedButton === index ? feedBackColor : ""}}
+                            >
+                            {color}
+                        </button>
+                    ))}
+                </div>
+             </div>
             <div className="result">{message}</div>
             {gameOver &&
-                <div>
-                    <button className="reset" onClick={resetGame}>
-                        Reset Game
-                    </button>
+                <div className="container">
+                    <div className="reset-container">
+                        <button className="reset" onClick={resetGame}>
+                            Reset Game
+                        </button>
+                    </div>
                 </div>
             }
         </div>

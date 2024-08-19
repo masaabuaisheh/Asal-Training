@@ -1,5 +1,5 @@
-$box-width: 200px;
-$box-height: 200px;
+$box-width: 350px;
+$box-height: 350px;
 $box-border-color: #000;
 $button-font-size: 16px;
 $button-padding: 10px 20px;
@@ -60,16 +60,33 @@ $start-button-hover-bg-color: #005bb5;
     border-radius: 10px; 
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 button {
-    display: block;
-    margin: 10px auto;
+    margin: 0 10px; 
     padding: $button-padding;
     font-size: $button-font-size;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    margin-top: $margin-top-main-class; 
 }
 
 .result {
     text-align: center;
     font-size: $result-font-size;
     margin-top: 20px;    
+    margin-bottom: 20px;
     color: #666;
+}
+
+.reser-container {
+    display: flex;
+    justify-content: center; 
 }
