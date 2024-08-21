@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 const ColorGuessingGame = () => {
@@ -7,7 +7,8 @@ const ColorGuessingGame = () => {
     const [message, setMessage] = useState("");
     const [correctGuesses, setCorrectGuesses] = useState(0);
     const [wrongGuesses, setWrongGuesses] = useState(0);
-    const roundsRef = useRef(0); // Track rounds
+   const [rounds, setRounds] = useState(0);
+//    const roundsRef = useRef<number>(0);
     const [gameOver, setGameOver] = useState(false);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [feedBackColor,setFeedBackColor] = useState('');
@@ -38,7 +39,10 @@ const ColorGuessingGame = () => {
     };
 
     const handleGuess = (guessColor: string, index: number) => {
-        roundsRef.current += 1;
+        setRounds((prevRounds) => prevRounds + 1);
+        //roundsRef.current += 1;
+        //console.log("Current round:", rounds);
+
         setSelectedButton(index);
 
         if (guessColor === boxColor) {
@@ -50,36 +54,42 @@ const ColorGuessingGame = () => {
             setFeedBackColor('#b30000');
         }
 
-        setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             setFeedBackColor('');
             setSelectedButton(null);
         }, 500);
 
-        if (roundsRef.current < 5) {
+        if (rounds + 1 < 5) {
+        // if (roundsRef.current < 5) {
             startGame();
         } else {
             setGameOver(true);
         }
+        
+        return () => clearTimeout(timeoutId); 
     };
+    
 
     const resetGame = () => {
         setCorrectGuesses(0);
         setWrongGuesses(0);
-        roundsRef.current = 0;
+        setRounds(0);
+        // roundsRef.current = 0;
         setMessage('');
         setGameOver(false);
         startGame();
     };
 
     useEffect(() => {
-        if (roundsRef.current === 5) {
+        if (rounds === 5) {
+            // if (roundsRef.current === 5) {
             if (correctGuesses === 5) {
                 setMessage('All guesses are correct!');
             } else {
                 setMessage(`Try guessing again. Wrong guesses: ${wrongGuesses} Correct guesses: ${correctGuesses}`);
             }
         }
-    }, [roundsRef.current, correctGuesses, wrongGuesses]);
+    }, [rounds, correctGuesses, wrongGuesses]);
 
     useEffect(() => {
         startGame();
@@ -119,3 +129,4 @@ const ColorGuessingGame = () => {
 };
 
 export default ColorGuessingGame;
+
