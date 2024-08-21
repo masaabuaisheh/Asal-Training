@@ -40,34 +40,26 @@ const DropdownComponent = () => {
   const [cursor, setCursor] = useState(-1);
   const [message, setMessage] = useState("");
 
-  const dropdownItemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
   const handleKey = (e: any) => {
     if (drop) {
       if (e.key === "ArrowUp") {
         if (cursor > 0) {
-          setIsSearch(false);
-          setCursor(prevCursor => {
-            const newCursor = prevCursor - 1;
+            const newCursor = cursor - 1;
             scrollToCursor(newCursor);
-            return newCursor;
-          });
+            setCursor(newCursor);
         } else if (cursor === 0) {
           setCursor(-1);  
           scrollToCursor(-1);
           setIsSearch(true);
-
         } else if (cursor === -1) {
           setIsSearch(true);  
         }
       } else if (e.key === "ArrowDown") {
         setIsSearch(false);
         if (cursor < filterData.length - 1) {
-          setCursor(prevCursor => {
-            const newCursor = prevCursor + 1;
+            const newCursor = cursor + 1;
             scrollToCursor(newCursor);
-            return newCursor;
-          });
+            setCursor(newCursor);
         } else if (cursor === filterData.length - 1) {
           setCursor(0);  
           scrollToCursor(0);
@@ -90,7 +82,8 @@ const DropdownComponent = () => {
     setDrop(false);
   };
 
-  const scrollToCursor = (index: number) => {
+/**
+ * const scrollToCursor = (index: number) => {
     if (index === -1) {
       dropdownItemsRef.current[-1]?.scrollIntoView({
         behavior: 'smooth',
@@ -101,6 +94,15 @@ const DropdownComponent = () => {
         block: 'nearest'
       });
     }
+  };
+ */
+  const scrollToCursor = (index: number) => {
+    const elementID = index === -1 ? 'input-search' : `country-${index}`;
+      document.getElementById(elementID)?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest'
+      });
+   
   };
 
   const removeCountryFromSelected = () => {
@@ -116,6 +118,11 @@ const DropdownComponent = () => {
     setDrop(false);    
   };
 
+  const toggleDrop = () => {
+    setDrop(prevDrop => !prevDrop);
+    setIsSearch(true);
+  };
+
   useEffect(() => {
     const timeoutId  = setTimeout (() =>{
       setFilterData(
@@ -126,6 +133,7 @@ const DropdownComponent = () => {
  
       );
     },1000)
+    return () => {clearTimeout(timeoutId)};
   }, [search]);
 
   return (
@@ -134,25 +142,19 @@ const DropdownComponent = () => {
       <div className='main-content-Searchable'>
         <h2>Searchable Dropdown</h2>
         <div className='country_data'
-          onClick={() => { 
-            setDrop(true)
-            setIsSearch(true)
-          }}
+          onClick={toggleDrop}
           //Triggered when: An element loses focus. This happens when a user clicks outside the element or navigates to another element
           onBlur={handleBlur}
         >
           <div className="search">
             <input
-              ref={el => {
-                dropdownItemsRef.current[-1] = el;
-              }}      
+              id='input-search'    
               type='text'
               value={search}
               onChange={(e) => {
                 if (isSearch) {
                   setSearch(e.target.value);
-                  
-                }
+                } 
               }}
               placeholder='Search for countries...' 
             />
@@ -171,9 +173,7 @@ const DropdownComponent = () => {
                   key={value}
                   role="button"
                   tabIndex={0}
-                  ref={el => {
-                    dropdownItemsRef.current[index] = el;
-                  }}                  
+                  id={`country-${index}`}   
                   onClick={() => selectCountry(index)}
                 >
                   {label}
