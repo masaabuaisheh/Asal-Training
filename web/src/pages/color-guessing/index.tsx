@@ -8,7 +8,6 @@ const ColorGuessingGame = () => {
     const [correctGuesses, setCorrectGuesses] = useState(0);
     const [wrongGuesses, setWrongGuesses] = useState(0);
    const [rounds, setRounds] = useState(0);
-//    const roundsRef = useRef<number>(0);
     const [gameOver, setGameOver] = useState(false);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
     const [feedBackColor,setFeedBackColor] = useState('');
@@ -40,9 +39,6 @@ const ColorGuessingGame = () => {
 
     const handleGuess = (guessColor: string, index: number) => {
         setRounds((prevRounds) => prevRounds + 1);
-        //roundsRef.current += 1;
-        //console.log("Current round:", rounds);
-
         setSelectedButton(index);
 
         if (guessColor === boxColor) {
@@ -60,7 +56,6 @@ const ColorGuessingGame = () => {
         }, 500);
 
         if (rounds + 1 < 5) {
-        // if (roundsRef.current < 5) {
             startGame();
         } else {
             setGameOver(true);
@@ -74,7 +69,6 @@ const ColorGuessingGame = () => {
         setCorrectGuesses(0);
         setWrongGuesses(0);
         setRounds(0);
-        // roundsRef.current = 0;
         setMessage('');
         setGameOver(false);
         startGame();
@@ -82,7 +76,6 @@ const ColorGuessingGame = () => {
 
     useEffect(() => {
         if (rounds === 5) {
-            // if (roundsRef.current === 5) {
             if (correctGuesses === 5) {
                 setMessage('All guesses are correct!');
             } else {
