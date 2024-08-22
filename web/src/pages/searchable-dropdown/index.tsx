@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaBars } from "react-icons/fa6";
 
@@ -27,113 +27,106 @@ const countries = {
 
 const countryOptions = Object.entries(countries)
   .map(([label, value]) => ({
-    label: label.replace(/_/g, ' '),
+    label: label.replace(/_/g, ' '), 
     value
   }))
-  .sort((a, b) => a.label.localeCompare(b.label));
+  .sort((a, b) => a.label.localeCompare(b.label)); 
 
 const DropdownComponent = () => {
-  const [search, setSearch] = useState("");
-  const [isSearch, setIsSearch] = useState(false);
-  const [filterData, setFilterData] = useState<{ label: string; value: string }[]>(countryOptions);
-  const [drop, setDrop] = useState(false);
-  const [cursor, setCursor] = useState(-1);
-  const [message, setMessage] = useState("");
+  const [search, setSearch] = useState(""); 
+  const [drop, setDrop] = useState(false); 
+  const [cursor, setCursor] = useState(-1); 
+  const [filterData, setFilterData] = useState(countryOptions); 
+  const [message, setMessage] = useState(""); 
 
   const handleKey = (e: any) => {
-    if (drop) {
+    if (drop) { 
       if (e.key === "ArrowUp") {
+        e.preventDefault(); 
         if (cursor > 0) {
-            const newCursor = cursor - 1;
-            scrollToCursor(newCursor);
-            setCursor(newCursor);
-        } else if (cursor === 0) {
-          setCursor(-1);  
-          scrollToCursor(-1);
-          setIsSearch(true);
-        } else if (cursor === -1) {
-          setIsSearch(true);  
+          setCursor(cursor - 1); // Move up in the list
+          focusOnElement(cursor - 1); 
+        } else {
+          setCursor(-1); // Reset cursor if at the top
+          focusOnElement(-1); // Focus back on the search input
         }
       } else if (e.key === "ArrowDown") {
-        setIsSearch(false);
+        e.preventDefault();
         if (cursor < filterData.length - 1) {
-            const newCursor = cursor + 1;
-            scrollToCursor(newCursor);
-            setCursor(newCursor);
-        } else if (cursor === filterData.length - 1) {
-          setCursor(0);  
-          scrollToCursor(0);
+          setCursor(cursor + 1); // Move down in the list
+          focusOnElement(cursor + 1);
+        } else {
+          setCursor(0); // Loop back to the top of the list
+          focusOnElement(0);
         }
-      } else if (e.key === " " || e.key === "Enter") {
+      } else if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         if (cursor >= 0) {
-          selectCountry(cursor);
+          selectCountry(cursor); // Select the highlighted country
         }
       } else if (e.key === "Escape") {
-        setDrop(false);
+        setDrop(false); 
       }
     }
   };
-  
+
   const selectCountry = (index: number) => {
     const selectedLabel = filterData[index].label;
-    setSearch(selectedLabel); 
+    setSearch(selectedLabel);
     setMessage("Country selected successfully!");
-    setDrop(false);
+    setDrop(false); 
+    setCursor(-1); 
   };
 
-/**
- * const scrollToCursor = (index: number) => {
-    if (index === -1) {
-      dropdownItemsRef.current[-1]?.scrollIntoView({
-        behavior: 'smooth',
-      });
-    } else {
-      dropdownItemsRef.current[index]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      });
-    }
-  };
- */
-  const scrollToCursor = (index: number) => {
-    const elementID = index === -1 ? 'input-search' : `country-${index}`;
-      document.getElementById(elementID)?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      });
-   
+  const focusOnElement = (index: number) => {
+    const elementId = index === -1 ? 'input-search' : `country-${index}`;
+    document.getElementById(elementId)?.focus();
   };
 
   const removeCountryFromSelected = () => {
     if (search) {
-      setSearch(""); 
+      setSearch("");
       setMessage("Selected country removed successfully!");
     } else {
-        setMessage("No country selected to remove");
+      setMessage("No country selected to remove");
     }
-  };
-
-  const handleBlur = () => {
-    setDrop(false);    
   };
 
   const toggleDrop = () => {
     setDrop(prevDrop => !prevDrop);
-    setIsSearch(true);
+    setTimeout(() => {
+      if (drop) {
+        document.getElementById('input-search')?.focus();
+      }
+    }, 0);
   };
 
+   useEffect(() => {
+    const handleClickOutside = (e: any) => {
+      const dropdown = document.getElementById('dropdown-wrapper');
+      const inputSearch = document.getElementById('input-search');
+      
+      if (dropdown && inputSearch && !dropdown.contains(e.target) && !inputSearch.contains(e.target)) {
+        setDrop(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
-    const timeoutId  = setTimeout (() =>{
+    const timeoutId = setTimeout(() => {
       setFilterData(
         countryOptions.filter(({ label }) =>
           label.toLowerCase().includes(search.toLowerCase())
         )
-        .sort((a, b) => a.label.toLowerCase().indexOf(search.toLowerCase()) - b.label.toLowerCase().indexOf(search.toLowerCase()))
- 
       );
-    },1000)
-    return () => {clearTimeout(timeoutId)};
+    }, 1000); 
+    return () => clearTimeout(timeoutId); 
   }, [search]);
 
   return (
@@ -141,29 +134,25 @@ const DropdownComponent = () => {
       <Link className='back-selectPage' href="/">Back</Link>
       <div className='main-content-Searchable'>
         <h2>Searchable Dropdown</h2>
-        <div className='country_data'
+        <div 
+          id='dropdown-wrapper'
+          className='country_data'
           onClick={toggleDrop}
-          //Triggered when: An element loses focus. This happens when a user clicks outside the element or navigates to another element
-          onBlur={handleBlur}
         >
           <div className="search">
             <input
-              id='input-search'    
+              id='input-search'
               type='text'
               value={search}
-              onChange={(e) => {
-                if (isSearch) {
-                  setSearch(e.target.value);
-                } 
-              }}
-              placeholder='Search for countries...' 
+              onChange={(e) => setSearch(e.target.value)}
+              placeholder='Search for countries...'
             />
             <span>
-            <FaBars 
-              className={`icon-transition ${drop ? '' : 'icon-rotate'}`} 
-              style={{ fontSize: "20px", color: 'GrayText' }} 
-            />
-          </span>
+              <FaBars
+                className={`icon-transition ${drop ? '' : 'icon-rotate'}`}
+                style={{ fontSize: "20px", color: 'GrayText' }}
+              />
+            </span>
           </div>
           {drop && (
             <div className='country'>
@@ -171,9 +160,8 @@ const DropdownComponent = () => {
                 <div
                   className={`countryValue ${cursor === index ? 'active' : ''}`}
                   key={value}
-                  role="button"
                   tabIndex={0}
-                  id={`country-${index}`}   
+                  id={`country-${index}`}
                   onClick={() => selectCountry(index)}
                 >
                   {label}
@@ -182,15 +170,13 @@ const DropdownComponent = () => {
             </div>
           )}
         </div>
-        <button className='remove-country'
-                onClick={() => removeCountryFromSelected()}>
+        <button className='remove-country' onClick={removeCountryFromSelected}>
           Remove selected country
         </button>
         {message && <p className='message'>{message}</p>}
       </div>
     </div>
   );
-}
+};
 
 export default DropdownComponent;
-
