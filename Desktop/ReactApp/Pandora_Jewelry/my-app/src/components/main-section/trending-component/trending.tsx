@@ -39,27 +39,43 @@ const braceletImages = [
   },
 ];
 
-const trending = () => {
-  const [activeImage, setActiveImage] = useState(braceletImages[0].id);
+const Trending = () => {
+  const [activeImage, setActiveImage] = useState(braceletImages[0].src);
   const [price, setPrice] = useState(braceletImages[0].price);
 
-  const handleMouseOver = (imageId: any, imagePrice: any) => {
-    setActiveImage(imageId);
+  const handleMouseOver = (imageSrc: string, imagePrice: string) => {
+    setActiveImage(imageSrc);
     setPrice(imagePrice);
   };
 
   return (
     <div className="trending-section">
-      <div className="trending-text">
-        <h3>TRENDING NOW</h3>
-      </div>
-      <div className="carousel-trendinf">
-        <div className="first-item">
-          <img />
+      <div className="first-product-bracelet">
+        <div className="main-image-bracelet">
+          <img src={activeImage} alt="Main Bracelet" className="main-img" />
+        </div>
+        <div className="color-options">
+          {braceletImages.map(({ id, color, src, price }) => (
+            <div
+              key={id}
+              className="circle"
+              style={{ backgroundColor: color }}
+              onMouseOver={() => handleMouseOver(src, price)}
+            />
+          ))}
+        </div>
+        <div className="bracelet-details">
+          <p className="best-seller-bracelet">BEST SELLER</p>
+          <p className="bracelet-text">
+            Pandora Moments Heart Clasp Snake Chain Bracelet
+          </p>
+        </div>
+        <div className="price">
+          <p>{price}</p>
         </div>
       </div>
     </div>
   );
 };
 
-export default trending;
+export default Trending;

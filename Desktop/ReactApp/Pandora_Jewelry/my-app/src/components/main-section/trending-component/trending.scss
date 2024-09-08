@@ -1,3 +1,65 @@
 .trending-section {
-    background-color: aqua;
+  //   background-color: aqua;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  text-align: center;
+
+//   .first-product-bracelet {
+//   }
+  .main-image-bracelet {
+    margin-bottom: 15px;
+
+    .main-img {
+      max-width: 280px;
+      height: auto;
+      padding-top: 20px;
+    }
+  }
+
+  .price {
+    font-size: 16px;
+    color: #333;
+    text-align: left;
+    padding-left: 47px;
+    padding-bottom: 20px;
+  }
+
+  .color-options {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-left: 47px;
+
+    .circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #fff;
+      background-size: cover;
+      background-position: center;
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .bracelet-details {
+    .best-seller-bracelet {
+      color: #bababa;
+      padding-right: 200px;
+      font-size: 12px;
+    }
+
+    .bracelet-text {
+      font-size: 14px;
+      width: 280px;
+      text-align: left;
+      padding-left: 47px;
+      color: #333;
+    }
+  }
 }
