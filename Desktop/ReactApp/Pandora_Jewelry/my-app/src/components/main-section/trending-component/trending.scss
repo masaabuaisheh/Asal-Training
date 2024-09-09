@@ -1,36 +1,55 @@
 .trending-section {
-  //   background-color: aqua;
   width: 100%;
   height: auto;
   padding: 20px;
   text-align: center;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
-//   .first-product-bracelet {
-//   }
-  .main-image-bracelet {
-    margin-bottom: 15px;
+  .trending-text {
+    font-size: 32px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+  }
 
-    .main-img {
-      max-width: 280px;
-      height: auto;
-      padding-top: 20px;
-    }
+  .slideshow-container {
+    position: relative;
+    overflow: hidden;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .trending-product-section {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    flex: 0 0 calc(100% / 4 - 20px);
+    box-sizing: border-box;
+    margin-right: 20px;
+  }
+
+  .main-img {
+    width: 100%;
+    height: auto;
+    padding-top: 20px;
   }
 
   .price {
     font-size: 16px;
     color: #333;
     text-align: left;
-    padding-left: 47px;
     padding-bottom: 20px;
   }
 
   .color-options {
     display: flex;
-    justify-content: flex-start;
     gap: 10px;
     flex-wrap: wrap;
-    padding-left: 47px;
 
     .circle {
       width: 20px;
@@ -47,19 +66,95 @@
     }
   }
 
-  .bracelet-details {
-    .best-seller-bracelet {
+  .bracelet-details,
+  .charm-details,
+  .crown-ring-details,
+  .sparkling-ring-details,
+  .moon-ring-details,
+  .necklace-details,
+  .earrings-details,
+  .dangle-charm-details,
+  .hoop-details,
+  .heart-ring-details {
+    .best-seller-bracelet,
+    .best-seller-charm,
+    .best-seller-crown-ring,
+    .best-seller-sparkling-ring,
+    .best-seller-moon-ring,
+    .best-seller-necklace,
+    .best-seller-earrings,
+    .best-seller-hoop,
+    .best-seller-heart-ring {
       color: #bababa;
-      padding-right: 200px;
       font-size: 12px;
+      margin-bottom: 5px;
+      text-align: left;
     }
 
-    .bracelet-text {
+    .bracelet-text,
+    .charm-text,
+    .crown-ring-text,
+    .sparkling-ring-text,
+    .moon-ring-text,
+    .necklace-text,
+    .earrings-text,
+    .dangle-charm-text,
+    .hoop-text,
+    .heart-ring-text {
       font-size: 14px;
-      width: 280px;
-      text-align: left;
-      padding-left: 47px;
       color: #333;
+      margin-bottom: 5px;
+      text-align: left;
+    }
+
+    .online-text {
+      color: #bababa;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      text-align: left;
     }
   }
+
+  .prev-btn,
+  .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    color: #bfbebd;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    z-index: 1000;
+  }
+
+  .prev-btn {
+    left: 80px;
+  }
+
+  .next-btn {
+    right: 80px;
+  }
+}
+
+.shop-all-jewelry {
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 15px;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+  width: 13%;
+ margin-left: 600px;
 }
