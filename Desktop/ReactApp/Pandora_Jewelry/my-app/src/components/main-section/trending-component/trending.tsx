@@ -105,7 +105,7 @@ const Trending = () => {
 
   const handlePrev = () => {
     setCurrentSlide(
-      (prev) => (prev - 1 + slideCount) % (slideCount - slidesToShow + 1)
+      (prev) => (prev - 1 ) % (slideCount - slidesToShow + 1)
     );
   };
 
@@ -371,8 +371,12 @@ const Trending = () => {
           </div>
         </div>
       </div>
-      <a href="https://us.pandora.net/en/jewelry/#contentID=159e51f9-7362-4760-8b21-eb58fb148509"
-      className="shop-all-jewelry">Shop All Jewelry</a>
+      <a
+        href="https://us.pandora.net/en/jewelry/#contentID=159e51f9-7362-4760-8b21-eb58fb148509"
+        className="shop-all-jewelry"
+      >
+        Shop All Jewelry
+      </a>
       <button className="prev-btn" onClick={handlePrev}>
         &lt;
       </button>

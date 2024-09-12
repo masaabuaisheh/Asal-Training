@@ -3,6 +3,7 @@ import Product_Styled from "../../assets/images/Product_Styled.png";
 import MODEL_STYLED from "../../assets/images/MODEL_STYLED.png";
 import Carousel from "./carousel-component/carousel";
 import Trending from "./trending-component/trending";
+import Dragcarousel from "./drag-carousel/dragcarousel";
 
 const Main = () => {
   const [currentImage, setCurrentImage] = useState<string>(Product_Styled.src);
@@ -85,6 +86,69 @@ const Main = () => {
         />
         <p>Free Returns</p>
         <h2>Prepaid shipping label included with every order.</h2>
+      </a>
+    </div>,
+  ];
+
+  const dragImages = [
+    <div key="1" className="slide-image-content">
+      <a
+        className="img1"
+        href="https://us.pandora.net/en/search?cgid=Pandora-Essence"
+      >
+        <img
+          src="//cdn.media.amplience.net/i/pandora/MEDIUM_Q324_E_PDP_Product_Styled_04_1x1_RGB?fmt=auto&qlt=60&crop={3.1%},{19.3%},{53.8%},{80.7%}"
+          alt="myPandora"
+        />
+        <div className="shop-now">SHOP NOW</div>
+      </a>
+    </div>,
+    <div key="2" className="slide-image-content">
+      <a
+        className="img2"
+        href="https://us.pandora.net/en/jewelry/icons-of-love/"
+      >
+        <img
+          src="//cdn.media.amplience.net/i/pandora/Q324_web_PLP_Rings_ShopTheLook_01?fmt=auto&qlt=60&crop={9.77%},{0%},{88.95%},{100%}"
+          alt="myPandora"
+        />
+        <div className="shop-now">SHOP NOW</div>
+      </a>
+    </div>,
+    <div key="3" className="slide-image-content">
+      <a
+        className="img3"
+        href="https://us.pandora.net/en/search?cgid=bracelets-charm-bracelets"
+      >
+        <img
+          src="//cdn.media.amplience.net/i/pandora/MEDIUM_Q324_E_PDP_Product_Styled_18_1x1_RGB?fmt=auto&qlt=60&crop={37.7%},{25.45%},{47.45%},{71.15%}"
+          alt="myPandora"
+        />
+        <div className="shop-now">SHOP NOW</div>
+      </a>
+    </div>,
+    <div key="4" className="slide-image-content">
+      <a
+        className="img4"
+        href="https://us.pandora.net/en/rings/rings/promise-rings/"
+      >
+        <img
+          src="//cdn.media.amplience.net/i/pandora/essence_mega?fmt=auto&qlt=60&"
+          alt="myPandora"
+        />
+        <div className="shop-now">SHOP NOW</div>
+      </a>
+    </div>,
+    <div key="5" className="slide-image-content">
+      <a
+        className="img5"
+        href="https://us.pandora.net/en/gifts/birthstone-of-the-month/"
+      >
+        <img
+          src="//cdn.media.amplience.net/i/pandora/Q324_August_CharmNecklaces_product_03_RGB_Extended_LocalAssetStore?fmt=auto&qlt=60&crop={22.37%},{26.22%},{64.18%},{64.15%}"
+          alt="myPandora"
+        />
+        <div className="shop-now">SHOP NOW</div>
       </a>
     </div>,
   ];
@@ -197,6 +261,9 @@ const Main = () => {
         </div>
         <div className="discover-image">
           <img src="/discoverPandora.png" alt="Discover Pandora" />
+        </div>
+        <div className="carousel-image">
+          <Dragcarousel dragImages={dragImages} />
         </div>
         <div className="products">
           <a
