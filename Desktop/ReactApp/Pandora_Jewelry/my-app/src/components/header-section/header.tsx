@@ -5,11 +5,12 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
 import { BsHandbag } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import Link from 'next/link';
+
 
 const header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const [isNavDropdownVisible, setNavDropdownVisible] = useState(false);
-
 
   const handleMouseEnter = () => {
     setDropdownVisible(true);
@@ -19,11 +20,11 @@ const header = () => {
   };
 
   const handleVisible = () => {
-    setNavDropdownVisible(true)
+    setNavDropdownVisible(true);
   };
 
   const handleMouseHidden = () => {
-    setNavDropdownVisible(false)
+    setNavDropdownVisible(false);
   };
 
   return (
@@ -138,7 +139,7 @@ const header = () => {
                 <a href="#">Birthstones</a>
                 <a href="#">Icons of Love</a>
                 <a href="#">Summer Collection</a>
-                <a href="#">Halloween</a>
+                <Link href="/halloween">Halloween</Link>
                 <a href="#">Lab-Grown Diamonds</a>
               </div>
 
