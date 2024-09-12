@@ -5,8 +5,7 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoPersonOutline } from "react-icons/io5";
 import { BsHandbag } from "react-icons/bs";
 import { MdKeyboardArrowDown } from "react-icons/md";
-import Link from 'next/link';
-
+import Link from "next/link";
 
 const header = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
@@ -15,6 +14,7 @@ const header = () => {
   const handleMouseEnter = () => {
     setDropdownVisible(true);
   };
+
   const handleMouseLeave = () => {
     setDropdownVisible(false);
   };

@@ -153,10 +153,11 @@ $nav-underline-color: #ffcad4;
       text-decoration: none;
       border: 1px solid black;
       padding: 10px 50px;
-      width: 50%;
+      width: 80%;
       align-items: center;
       justify-content: center;
-      margin-left: 8%;
+      margin-left: 11%;
+      margin-top: 8px;
 
       &.login-button {
         background-color: black;
@@ -179,8 +180,9 @@ $nav-underline-color: #ffcad4;
       &.what-is-pandora {
         border: none;
         color: #333;
-        width: 52%;
+        width: 100%;
         position: relative;
+        margin-left: -5px;
 
         &::after {
           content: "";

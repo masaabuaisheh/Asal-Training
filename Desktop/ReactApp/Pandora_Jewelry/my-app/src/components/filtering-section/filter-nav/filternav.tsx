@@ -8,10 +8,10 @@ interface FilternavProps {
 
 const filternav: React.FC<FilternavProps> = ({ handleInputChange, query }) => {
   return (
-    <nav>
+    <nav className="filter-nav">
       <div className="nav-container">
         <input
-          className="search-input"
+          className="searchInp"
           type="text"
           onChange={handleInputChange}
           value={query}
