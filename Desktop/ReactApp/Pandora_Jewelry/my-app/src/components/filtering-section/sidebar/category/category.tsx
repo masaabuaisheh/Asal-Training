@@ -1,36 +1,41 @@
 import React from "react";
 import Input from "../../filter-components/input";
 
-interface PriceProps {
+interface CategoryProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const Category: React.FC<PriceProps> = ({ handleChange }) => {
+
+const Category: React.FC<CategoryProps> = ({ handleChange }) => {
   return (
     <div>
       <h2 className="sidebar-title">Category</h2>
-
       <div>
         <label className="sidebar-label-container">
-          <input onChange={handleChange} type="radio" value="" name="test" />
+          <input
+            onChange={handleChange}
+            type="radio"
+            value=""
+            name="category"
+          />
           <span className="checkmark"></span>All
         </label>
         <Input
           handleChange={handleChange}
           value="charms"
           title="Charms"
-          name="test"
+          name="category"
         />
         <Input
           handleChange={handleChange}
           value="bracelets"
           title="Bracelets"
-          name="test"
+          name="category"
         />
         <Input
           handleChange={handleChange}
           value="rings"
           title="Rings"
-          name="test"
+          name="category"
         />
       </div>
     </div>
